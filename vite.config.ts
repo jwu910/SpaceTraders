@@ -1,6 +1,8 @@
-import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import staticAdapter from "solid-start-static";
+import solid from "solid-start/vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [solid()],
-})
+  base: "/SpaceTraders/",
+  plugins: [solid({ adapter: staticAdapter() })],
+});
