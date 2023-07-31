@@ -12,6 +12,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@solidjs/router": "^0.8.2",
     "axios": "^1.4.0",
     "solid-js": "^1.7.8"
   },
