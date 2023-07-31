@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
+  "dependencies": {
     "solid-js": "^1.7.8"
   },
   "devDependencies": {
