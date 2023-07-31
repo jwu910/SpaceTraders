@@ -1,7 +1,9 @@
 import { createSignal } from "solid-js";
 import "./App.css";
+import { getAgentInfo } from "./api/info";
 
 function App() {
+  const [agentInfo, setAgentInfo] = createSignal({});
   const [usingStorage, setUsingStorage] = createSignal(false);
   const [token, setToken] = createSignal(
     localStorage.getItem("spaceTradersToken") || ""
@@ -12,6 +14,10 @@ function App() {
     if (token()) {
       setUsingStorage(true);
     }
+  } else {
+    getAgentInfo({ token: token() }).then((res) => {
+      res && setAgentInfo(res.data);
+    });
   }
 
   const logout = () => {
@@ -56,6 +62,7 @@ function App() {
             {usingStorage() && (
               <>
                 <p>Logged in via localStorage</p>
+                <p>{agentInfo().get("callsign")}</p>
               </>
             )}
             <button onClick={() => logout()}>Logout</button>
