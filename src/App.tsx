@@ -1,35 +1,68 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createSignal } from "solid-js";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = createSignal(0)
+  const [token, setToken] = createSignal(
+    import.meta.env.VITE_TOKEN ||
+      localStorage.getItem("spaceTradersToken") ||
+      ""
+  );
+
+  if (!token()) {
+    setToken(localStorage.getItem("spaceTradersToken") || "");
+  }
+
+  const logout = () => {
+    setToken("");
+    localStorage.removeItem("spaceTradersToken");
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
+      {!token() ? (
+        <>
+          <h2>Enter your token to get started</h2>
+          {/* Create form with one input for a string, the submit button should invoke setToken with the string value from the input */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const token = e.currentTarget.token.value;
+              setToken(token);
+              localStorage.setItem("spaceTradersToken", token);
+            }}
+          >
+            <label>
+              Token:
+              <input type="text" name="token" />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </>
+      ) : (
+        <>
+          <h1>Welcome to Space Traders UI</h1>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://spacetraders.io"
+          >
+            Space Traders
+          </a>
+
+          <div>
+            {import.meta.env.VITE_TOKEN && (
+              <>
+                <p>
+                  Using token from local env. Clear env file before logging out.
+                </p>
+              </>
+            )}
+            <button onClick={() => logout()}>Logout</button>
+          </div>
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
