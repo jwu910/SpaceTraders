@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 import "./App.css";
 
 function App() {
+  const [usingStorage, setUsingStorage] = createSignal(false);
   const [token, setToken] = createSignal(
     import.meta.env.VITE_TOKEN ||
       localStorage.getItem("spaceTradersToken") ||
@@ -10,6 +11,9 @@ function App() {
 
   if (!token()) {
     setToken(localStorage.getItem("spaceTradersToken") || "");
+    if (token()) {
+      setUsingStorage(true);
+    }
   }
 
   const logout = () => {
@@ -29,6 +33,7 @@ function App() {
               const token = e.currentTarget.token.value;
               setToken(token);
               localStorage.setItem("spaceTradersToken", token);
+              setUsingStorage(true);
             }}
           >
             <label>
@@ -50,11 +55,9 @@ function App() {
           </a>
 
           <div>
-            {import.meta.env.VITE_TOKEN && (
+            {usingStorage() && (
               <>
-                <p>
-                  Using token from local env. Clear env file before logging out.
-                </p>
+                <p>Logged in via localStorage</p>
               </>
             )}
             <button onClick={() => logout()}>Logout</button>
