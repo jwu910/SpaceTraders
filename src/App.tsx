@@ -4,9 +4,7 @@ import "./App.css";
 function App() {
   const [usingStorage, setUsingStorage] = createSignal(false);
   const [token, setToken] = createSignal(
-    import.meta.env.VITE_TOKEN ||
-      localStorage.getItem("spaceTradersToken") ||
-      ""
+    localStorage.getItem("spaceTradersToken") || ""
   );
 
   if (!token()) {
