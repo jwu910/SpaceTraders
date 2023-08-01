@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 
 export default function App() {
   return (
-    <Routes>
+    <Routes base="/spacetraders/">
       <Route path="/" component={HomePage} />
     </Routes>
   );
