@@ -4,8 +4,8 @@
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 
-export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/spacetraders/" : "./",
+export default defineConfig({
+  base: "/spacetraders/",
   plugins: [solidPlugin()],
   test: {
     environment: "jsdom",
@@ -26,4 +26,4 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     conditions: ["development", "browser"],
   },
-}));
+});

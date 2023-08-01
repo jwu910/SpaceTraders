@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jwu910.github.io/SpaceTraders",
+  "homepage": "https://jwu910.github.io/spacetraders",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
