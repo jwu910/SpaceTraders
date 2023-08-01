@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/SpaceTraders/" : "./",
+  base: mode === "production" ? "/spacetraders/" : "./",
   plugins: [solidPlugin()],
   test: {
     environment: "jsdom",
